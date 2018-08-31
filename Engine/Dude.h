@@ -1,6 +1,7 @@
 #pragma once
 #include "Keyboard.h"
 #include "Graphics.h"
+class Poo;
 
 class Dude {
 public:
@@ -12,6 +13,7 @@ public:
 	void Update(const Keyboard& kbd);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
+	bool IsColliding(int otherX, int otherY, int otherWidth, int otherHeight) const;
 private:
 	int x;
 	int y;

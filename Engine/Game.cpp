@@ -30,7 +30,8 @@ Game::Game(MainWindow& wnd)
 	rng(rd()),
 	xDist(0, gfx.ScreenWidth - 1 - Poo::GetWidth()),
 	yDist(0, gfx.ScreenHeight - 1 - Poo::GetHeight()),
-	dude(xDist(rng), yDist(rng))
+	dude(xDist(rng), yDist(rng)),
+	goal(xDist(rng), yDist(rng), Dude::GetWidth(), Dude::GetHeight())
 {
 	std::uniform_int_distribution<int> vDist(-1, 1);
 	for (int i = 0; i < nPoo; i++)
@@ -50,15 +51,27 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (isStarted)
+	goal.Update();
+	if (isStarted && !gameOver)
 	{
 		dude.Update(wnd.kbd);
 		for (int i = 0; i < nPoo; i++)
 		{
-			poos[i].Update(dude);
+			Poo& poo = poos[i];
+			poo.Update(dude);
+			if (dude.IsColliding(poo.GetX(), poo.GetY(), poo.GetWidth(), poo.GetHeight()))
+			{
+				gameOver = true;
+				break;
+			}
+			if (dude.IsColliding(goal.GetX(), goal.GetY(), goal.GetWidth(), goal.GetHeight()))
+			{
+				scoreboard.Increment();
+				goal.Move(xDist(rng), yDist(rng));
+			}
 		}
 	}
-	else
+	else if (!isStarted)
 	{
 		if (wnd.kbd.KeyIsPressed(VK_RETURN))
 			isStarted = true;
@@ -28418,29 +28431,18 @@ void Game::ComposeFrame()
 {
 	if(isStarted)
 	{
-		bool allEaten = true;
-
-		for (int i = 0; i < nPoo; i++)
-		{
-			if (!poos[i].IsEaten())
-			{
-				allEaten = false;
-				break;
-			}
-		}
-
-		if (allEaten)
-			DrawGameOver(gfx.ScreenWidth / 2 - 84 / 2, gfx.ScreenHeight / 2 - 64 / 2);
+		scoreboard.Draw(gfx);
+		goal.Draw(gfx);
 		dude.Draw(gfx);
-
 		for (int i = 0; i < nPoo; i++)
 		{
 			poos[i].Draw(gfx);
 		}
+		if(gameOver)
+			DrawGameOver(gfx.ScreenWidth / 2 - 84 / 2, gfx.ScreenHeight / 2 - 64 / 2);
 	}
 	else
 	{
 		DrawTitleScreen(gfx.ScreenWidth/2 - 150/2, gfx.ScreenHeight/2 - 175/2);
 	}
-
 }

@@ -1,6 +1,7 @@
 #include "Dude.h"
 #include "Keyboard.h"
 #include "Graphics.h"
+#include "Poo.h"
 
 Dude::Dude(int in_x, int in_y)
 {
@@ -390,4 +391,12 @@ void Dude::Draw(Graphics& gfx) const
 	gfx.PutPixel(10 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(11 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(12 + x, 19 + y, 0, 0, 0);
+}
+
+bool Dude::IsColliding(int otherX, int otherY, int otherWidth, int otherHeight) const
+{
+	return x + width >= otherX &&
+		x <= otherX + otherWidth &&
+		y + height >= otherY &&
+		y <= otherY + otherHeight;
 }

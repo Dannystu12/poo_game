@@ -9,6 +9,8 @@ public:
 	void Update(const Dude& dude);
 	void Draw(Graphics& gfx) const;
 	bool IsEaten() const;
+	int GetX() const;
+	int GetY() const;
 	static int GetWidth();
 	static int GetHeight();
 private:
@@ -18,6 +20,5 @@ private:
 	int vy;
 	static constexpr int width = 24;
 	static constexpr int height = 24;
-	bool isEaten = false;
 	bool initialized = false;
 };

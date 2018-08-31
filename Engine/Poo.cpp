@@ -41,20 +41,12 @@ void Poo::Update(const Dude& dude)
 		y = Graphics::ScreenHeight - 1 - height;
 		vy = -vy;
 	}
-
-	if (dude.GetX() +Dude::GetWidth() >= x &&
-		dude.GetX() <= x + width &&
-		dude.GetY() + Dude::GetHeight() >= y &&
-		dude.GetY()  <= y + height) 
-	{
-		isEaten = true;
-	}
 }
 
 void Poo::Draw(Graphics& gfx) const
 {
 	assert(initialized);
-	if (isEaten) return;
+
 
 	gfx.PutPixel(14 + x, 0 + y, 138, 77, 0);
 	gfx.PutPixel(7 + x, 1 + y, 138, 77, 0);
@@ -289,15 +281,19 @@ void Poo::Draw(Graphics& gfx) const
 	gfx.PutPixel(6 + x, 23 + y, 51, 28, 0);
 }
 
-bool Poo::IsEaten() const
+
+int Poo::GetX() const
 {
-	assert(initialized);
-	return isEaten;
+	return x;
+}
+
+int Poo::GetY() const
+{
+	return y;
 }
 
 int Poo::GetWidth()
 {
-	assert(initialized);
 	return width;
 }
 

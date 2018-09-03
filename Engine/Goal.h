@@ -3,19 +3,19 @@
 
 class Goal {
 public:
-	Goal(int x, int y, int width, int height);
+	Goal(float x, float y, float width, float height);
 	void Update();
 	void Draw(Graphics & gfx) const;
-	void Move(int x, int y);
-	int GetX() const;
-	int GetY() const;
-	int GetWidth() const;
-	int GetHeight() const;
+	void Move(float x, float y);
+	float GetX() const;
+	float GetY() const;
+	float GetWidth() const;
+	float GetHeight() const;
 private:
-	int x;
-	int y;
-	int width;
-	int height;
+	float x;
+	float y;
+	float width;
+	float height;
 	Color c = {127, 0, 0 };
 	int colorChangeRate = 1;
 };

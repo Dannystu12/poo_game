@@ -27,6 +27,7 @@
 #include "Dude.h"
 #include "Goal.h"
 #include "Scoreboard.h"
+#include "FrameTimer.h"
 #include <random>
 
 class Game
@@ -51,14 +52,15 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	FrameTimer ft;
 	std::random_device rd;
 	std::mt19937 rng;
-	std::uniform_int_distribution<int> xDist;
-	std::uniform_int_distribution<int> yDist;
+	std::uniform_real_distribution < float > xDist;
+	std::uniform_real_distribution<float> yDist;
 	Dude dude;
 	Goal goal;
 	Scoreboard scoreboard;
-	static constexpr int nPoo = 10;
+	static constexpr int nPoo = 25;
 	Poo poos[nPoo];
 	bool isStarted = false;
 	bool gameOver = false;

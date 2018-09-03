@@ -5,19 +5,19 @@ class Poo;
 
 class Dude {
 public:
-	Dude(int in_x, int in_y);
-	int GetX() const;
-	int GetY() const;
-	static int GetWidth();
-	static int GetHeight();
-	void Update(const Keyboard& kbd);
+	Dude(float in_x, float in_y);
+	float GetX() const;
+	float GetY() const;
+	static float GetWidth();
+	static float GetHeight();
+	void Update(const Keyboard& kbd, float dt);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
-	bool IsColliding(int otherX, int otherY, int otherWidth, int otherHeight) const;
+	bool IsColliding(float otherX, float otherY, float otherWidth, float otherHeight) const;
 private:
-	int x;
-	int y;
-	static constexpr int speed = 1;
-	static constexpr int width = 20;
-	static constexpr int height = 20;
+	float x;
+	float y;
+	static constexpr float speed = 1.0f * 60.f;
+	static constexpr float width = 20.0f;
+	static constexpr float height = 20.0f;
 };

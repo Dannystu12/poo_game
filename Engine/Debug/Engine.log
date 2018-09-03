@@ -1,3 +1,5 @@
-﻿  Game.cpp
-  Goal.cpp
+﻿  FrameTimer.cpp
+  Game.cpp
+  Main.cpp
+  MainWindow.cpp
   Engine.vcxproj -> C:\Users\Daniel\Dropbox\Dropbox\Code\C++\Chilli Tomato Noodle\3.Poo Game\Debug\Engine.exe

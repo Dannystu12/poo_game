@@ -23,17 +23,18 @@
 #include <random>
 #include <ctime>
 
+
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
 	rng(rd()),
-	xDist(0, gfx.ScreenWidth - 1 - Poo::GetWidth()),
-	yDist(0, gfx.ScreenHeight - 1 - Poo::GetHeight()),
+	xDist(0, float(gfx.ScreenWidth - 1) - Poo::GetWidth()),
+	yDist(0, float(gfx.ScreenHeight - 1) - Poo::GetHeight()),
 	dude(xDist(rng), yDist(rng)),
 	goal(xDist(rng), yDist(rng), Dude::GetWidth(), Dude::GetHeight())
 {
-	std::uniform_int_distribution<int> vDist(-1, 1);
+	std::uniform_real_distribution<float> vDist(-2.0f, 2.0f);
 	for (int i = 0; i < nPoo; i++)
 	{
 		poos[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
@@ -51,6 +52,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
 	goal.Update();
 	if (isStarted && !gameOver)
 	{
@@ -28444,5 +28446,6 @@ void Game::ComposeFrame()
 	else
 	{
 		DrawTitleScreen(gfx.ScreenWidth/2 - 150/2, gfx.ScreenHeight/2 - 175/2);
+		//gfx.DrawCircle(10, 10, 50, Colors::Red);
 	}
 }

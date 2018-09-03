@@ -34,7 +34,7 @@ Game::Game(MainWindow& wnd)
 	dude(xDist(rng), yDist(rng)),
 	goal(xDist(rng), yDist(rng), Dude::GetWidth(), Dude::GetHeight())
 {
-	std::uniform_real_distribution<float> vDist(-2.0f, 2.0f);
+	std::uniform_real_distribution<float> vDist(-2.0f * 60.0f, 2.0f * 60.0f);
 	for (int i = 0; i < nPoo; i++)
 	{
 		poos[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
@@ -56,11 +56,11 @@ void Game::UpdateModel()
 	goal.Update();
 	if (isStarted && !gameOver)
 	{
-		dude.Update(wnd.kbd);
+		dude.Update(wnd.kbd, dt);
 		for (int i = 0; i < nPoo; i++)
 		{
 			Poo& poo = poos[i];
-			poo.Update(dude);
+			poo.Update(dude, dt);
 			if (dude.IsColliding(poo.GetX(), poo.GetY(), poo.GetWidth(), poo.GetHeight()))
 			{
 				gameOver = true;

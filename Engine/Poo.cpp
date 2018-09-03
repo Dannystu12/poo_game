@@ -14,11 +14,11 @@ void Poo::Init(float in_x, float in_y, float in_vx, float in_vy)
 
 }
 
-void Poo::Update(const Dude& dude)
+void Poo::Update(const Dude& dude, float dt)
 {
 	assert(initialized);
-	x += vx;
-	y += vy;
+	x += vx * dt;
+	y += vy * dt;
 
 	if (x < 0)
 	{

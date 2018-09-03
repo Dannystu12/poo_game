@@ -26,6 +26,7 @@
 #include <string>
 #include <array>
 
+
 // Ignore the intellisense error "cannot open source file" for .shh files.
 // They will be created during the build sequence before the preprocessor runs.
 namespace FramebufferShaders
@@ -314,6 +315,22 @@ void Graphics::PutPixel( int x,int y,Color c )
 	assert( y >= 0 );
 	assert( y < int( Graphics::ScreenHeight ) );
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
+}
+
+void Graphics::DrawCircle(int x, int y, int radius, Color c)
+{
+	for (int x_sub = 0; x_sub <= radius; x_sub++)
+	{
+		int y_sub = std::sqrt(std::pow(radius, 2) - std::pow(x_sub - radius, 2));
+		for (int i = 0; i < y_sub; i++)
+		{
+			PutPixel(x + x_sub, y + radius + i, c);
+			PutPixel(x + x_sub, y + radius - i, c);
+			PutPixel(x + 2 * radius - x_sub, y + radius + i, c);
+			PutPixel(x + 2 * radius - x_sub, y + radius - i, c);
+		}
+	}
+
 }
 
 

@@ -1,6 +1,6 @@
 #include "Goal.h"
 
-Goal::Goal(int x, int y, int width, int height) :
+Goal::Goal(float x, float y, float width, float height) :
 	x(x),
 	y(y),
 	width(width),
@@ -21,37 +21,37 @@ void Goal::Update()
 
 void Goal::Draw(Graphics & gfx) const
 {
-	for (int i = 0; i < width; i++)
+	for (int i = 0; i < (int) width; i++)
 	{
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < (int) height; j++)
 		{
-			gfx.PutPixel(x + i, y + j, c);
+			gfx.PutPixel(int(x) + i, int(y) + j, c);
 		}
 	}
 }
 
-void Goal::Move(int x, int y)
+void Goal::Move(float x, float y)
 {
 	this->x = x;
 	this->y = y;
 }
 
-int Goal::GetX() const
+float Goal::GetX() const
 {
 	return x;
 }
 
-int Goal::GetY() const
+float Goal::GetY() const
 {
 	return y;
 }
 
-int Goal::GetWidth() const
+float Goal::GetWidth() const
 {
 	return width;
 }
 
-int Goal::GetHeight() const
+float Goal::GetHeight() const
 {
 	return height;
 }

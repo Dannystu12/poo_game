@@ -5,20 +5,19 @@
 class Poo
 {
 public:
-	void Init(int in_x, int in_y, int in_vx, int in_vy);
-	void Update(const Dude& dude);
+	void Init(float in_x, float in_y, float in_vx, float in_vy);
+	void Update(const Dude& dude, float dt);
 	void Draw(Graphics& gfx) const;
-	bool IsEaten() const;
-	int GetX() const;
-	int GetY() const;
-	static int GetWidth();
-	static int GetHeight();
+	float GetX() const;
+	float GetY() const;
+	static float GetWidth();
+	static float GetHeight();
 private:
-	int x;
-	int y;
-	int vx;
-	int vy;
-	static constexpr int width = 24;
-	static constexpr int height = 24;
+	float x;
+	float y;
+	float vx;
+	float vy;
+	static constexpr float width = 24;
+	static constexpr float height = 24;
 	bool initialized = false;
 };

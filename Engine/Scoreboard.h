@@ -13,6 +13,6 @@ private:
 	int x = 0;
 	int y = 0;
 	int score = 0;
-	const int height = Dude::GetHeight();
+	const float height = Dude::GetHeight();
 	Color c = Color(0, 255, 0);
 };

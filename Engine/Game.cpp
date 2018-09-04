@@ -34,7 +34,7 @@ Game::Game(MainWindow& wnd)
 	dude(xDist(rng), yDist(rng)),
 	goal(xDist(rng), yDist(rng), Dude::GetWidth(), Dude::GetHeight())
 {
-	std::uniform_real_distribution<float> vDist(-2.0f * 60.0f, 2.0f * 60.0f);
+	std::uniform_real_distribution<float> vDist(-1.5f * 60.0f, 1.5f * 60.0f);
 	for (int i = 0; i < nPoo; i++)
 	{
 		poos[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));

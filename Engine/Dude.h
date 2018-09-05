@@ -1,5 +1,5 @@
 #pragma once
-#include "Keyboard.h"
+#include "Mouse.h"
 #include "Graphics.h"
 #include "Vec2.h"
 class Poo;
@@ -10,7 +10,7 @@ public:
 	Vec2 GetPos() const;
 	static float GetWidth();
 	static float GetHeight();
-	void Update(const Keyboard& kbd, float dt);
+	void Update(const Mouse& mouse, float dt);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 	bool IsColliding(const Vec2& otherPos, float otherWidth, float otherHeight) const;

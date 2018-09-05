@@ -56,7 +56,7 @@ void Game::UpdateModel()
 	goal.Update();
 	if (isStarted && !gameOver)
 	{
-		dude.Update(wnd.kbd, dt);
+		dude.Update(wnd.mouse, dt);
 		for (int i = 0; i < nPoo; i++)
 		{
 			Poo& poo = poos[i];

@@ -24,28 +24,18 @@ float Dude::GetHeight()
 	return height;
 }
 
-void Dude::Update(const Keyboard& kbd, float dt)
+void Dude::Update(const Mouse& mouse, float dt)
 {
 	Vec2 vel(0.0f, 0.0f);
-	if (kbd.KeyIsPressed(VK_RIGHT))
+
+	if (mouse.LeftIsPressed() )
 	{
-		vel.x += 1.0f;
-	}
-	else if (kbd.KeyIsPressed(VK_LEFT))
-	{
-		vel.x -= 1.0f;
+		const Vec2 center(pos.x + float(width)/2.0f, pos.y + float(height)/2.0f);
+		const Vec2 mousePos((float)mouse.GetPosX(), (float)mouse.GetPosY());
+		Vec2 delta = mousePos - center;
+		pos += delta.Normalize() * speed * dt;
 	}
 
-	if (kbd.KeyIsPressed(VK_UP))
-	{
-		vel.y -= 1.0f;
-	}
-	else if (kbd.KeyIsPressed(VK_DOWN))
-	{
-		vel.y += 1.0f;
-	}
-
-	pos += vel.Normalize() * speed * dt;
 	ClampToScreen();
 }
 

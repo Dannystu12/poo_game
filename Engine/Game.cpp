@@ -31,13 +31,13 @@ Game::Game(MainWindow& wnd)
 	rng(rd()),
 	xDist(0, float(gfx.ScreenWidth - 1) - Poo::GetWidth()),
 	yDist(0, float(gfx.ScreenHeight - 1) - Poo::GetHeight()),
-	dude(xDist(rng), yDist(rng)),
-	goal(xDist(rng), yDist(rng), Dude::GetWidth(), Dude::GetHeight())
+	dude(Vec2(xDist(rng), yDist(rng))),
+	goal(Vec2(xDist(rng), yDist(rng)), Dude::GetWidth(), Dude::GetHeight())
 {
-	std::uniform_real_distribution<float> vDist(-2.0f * 60.0f, 2.0f * 60.0f);
+	std::uniform_real_distribution<float> vDist(-1.5f * 60.0f, 1.5f * 60.0f);
 	for (int i = 0; i < nPoo; i++)
 	{
-		poos[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
+		poos[i].Init(Vec2(xDist(rng), yDist(rng)), Vec2(vDist(rng), vDist(rng)));
 	}
 
 }
@@ -56,20 +56,20 @@ void Game::UpdateModel()
 	goal.Update();
 	if (isStarted && !gameOver)
 	{
-		dude.Update(wnd.kbd, dt);
+		dude.Update(wnd.mouse, dt);
 		for (int i = 0; i < nPoo; i++)
 		{
 			Poo& poo = poos[i];
 			poo.Update(dude, dt);
-			if (dude.IsColliding(poo.GetX(), poo.GetY(), poo.GetWidth(), poo.GetHeight()))
+			if (dude.IsColliding(poo.GetPos(), poo.GetWidth(), poo.GetHeight()))
 			{
 				gameOver = true;
 				break;
 			}
-			if (dude.IsColliding(goal.GetX(), goal.GetY(), goal.GetWidth(), goal.GetHeight()))
+			if (dude.IsColliding(goal.GetPos(), goal.GetWidth(), goal.GetHeight()))
 			{
 				scoreboard.Increment();
-				goal.Move(xDist(rng), yDist(rng));
+				goal.Move(Vec2(xDist(rng), yDist(rng)));
 			}
 		}
 	}

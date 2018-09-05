@@ -1,19 +1,18 @@
 #pragma once
 #include "Graphics.h"
+#include "Vec2.h"
 
 class Goal {
 public:
-	Goal(float x, float y, float width, float height);
+	Goal(const Vec2& pos_in, float width, float height);
 	void Update();
 	void Draw(Graphics & gfx) const;
-	void Move(float x, float y);
-	float GetX() const;
-	float GetY() const;
+	void Move(const Vec2& pos_in);
+	Vec2 GetPos() const;
 	float GetWidth() const;
 	float GetHeight() const;
 private:
-	float x;
-	float y;
+	Vec2 pos;
 	float width;
 	float height;
 	Color c = {127, 0, 0 };

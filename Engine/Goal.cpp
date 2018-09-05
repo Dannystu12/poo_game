@@ -1,8 +1,7 @@
 #include "Goal.h"
 
-Goal::Goal(float x, float y, float width, float height) :
-	x(x),
-	y(y),
+Goal::Goal(const Vec2& pos_in, float width, float height) :
+	pos(pos_in),
 	width(width),
 	height(height)
 {
@@ -25,25 +24,20 @@ void Goal::Draw(Graphics & gfx) const
 	{
 		for (int j = 0; j < (int) height; j++)
 		{
-			gfx.PutPixel(int(x) + i, int(y) + j, c);
+			gfx.PutPixel(int(pos.x) + i, int(pos.y) + j, c);
 		}
 	}
 }
 
-void Goal::Move(float x, float y)
+void Goal::Move(const Vec2& pos_in)
 {
-	this->x = x;
-	this->y = y;
+	pos = pos_in;
 }
 
-float Goal::GetX() const
-{
-	return x;
-}
 
-float Goal::GetY() const
+Vec2 Goal::GetPos() const
 {
-	return y;
+	return Vec2(pos.x, pos.y);
 }
 
 float Goal::GetWidth() const

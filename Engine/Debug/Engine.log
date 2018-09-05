@@ -1,12 +1,2 @@
 ﻿  Dude.cpp
-  Game.cpp
-  Goal.cpp
-  Graphics.cpp
-  Keyboard.cpp
-  Main.cpp
-  MainWindow.cpp
-  Poo.cpp
-  Scoreboard.cpp
-c:\users\daniel\dropbox\dropbox\code\c++\chilli tomato noodle\3.poo game\engine\graphics.cpp(324): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  LINK : C:\Users\Daniel\Dropbox\Dropbox\Code\C++\Chilli Tomato Noodle\3.Poo Game\Debug\Engine.exe not found or not built by the last incremental link; performing full link
   Engine.vcxproj -> C:\Users\Daniel\Dropbox\Dropbox\Code\C++\Chilli Tomato Noodle\3.Poo Game\Debug\Engine.exe

@@ -321,7 +321,7 @@ void Graphics::DrawCircle(int x, int y, int radius, Color c)
 {
 	for (int x_sub = 0; x_sub <= radius; x_sub++)
 	{
-		int y_sub = std::sqrt(std::pow(radius, 2) - std::pow(x_sub - radius, 2));
+		int y_sub = (int) std::sqrt(std::pow(radius, 2) - std::pow(x_sub - radius, 2));
 		for (int i = 0; i < y_sub; i++)
 		{
 			PutPixel(x + x_sub, y + radius + i, c);

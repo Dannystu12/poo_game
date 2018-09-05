@@ -3,13 +3,11 @@
 #include "Dude.h"
 #include <assert.h>
 
-void Poo::Init(float in_x, float in_y, float in_vx, float in_vy)
+void Poo::Init(const Vec2& pos_in, const Vec2& vel_in)
 {
 	assert(!initialized);
-	x = in_x;
-	y = in_y;
-	vx = in_vx;
-	vy = in_vy;
+	pos = pos_in;
+	vel = vel_in;
 	initialized = true;
 
 }
@@ -17,29 +15,28 @@ void Poo::Init(float in_x, float in_y, float in_vx, float in_vy)
 void Poo::Update(const Dude& dude, float dt)
 {
 	assert(initialized);
-	x += vx * dt;
-	y += vy * dt;
+	pos += vel * dt;
 
-	if (x < 0)
+	if (pos.x < 0)
 	{
-		x= 0;
-		vx = -vx;
+		pos.x = 0;
+		vel.x = -vel.x;
 	}
-	else if (x + width >= (float) Graphics::ScreenWidth)
+	else if (pos.x + width >= (float) Graphics::ScreenWidth)
 	{
-		x = float(Graphics::ScreenWidth - 1 ) - width;
-		vx = -vx;
+		pos.x = float(Graphics::ScreenWidth - 1 ) - width;
+		vel.x = -vel.x;
 	}
 
-	if (y < 0)
+	if (pos.y < 0)
 	{
-		y = 0;
-		vy = -vy;
+		pos.y = 0;
+		vel.y = -vel.y;
 	}
-	else if (y + height >= (float) Graphics::ScreenHeight)
+	else if (pos.y + height >= (float) Graphics::ScreenHeight)
 	{
-		y = float(Graphics::ScreenHeight - 1) - height;
-		vy = -vy;
+		pos.y = float(Graphics::ScreenHeight - 1) - height;
+		vel.y = -vel.y;
 	}
 }
 
@@ -47,8 +44,8 @@ void Poo::Draw(Graphics& gfx) const
 {
 	assert(initialized);
 
-	const int x_int = (int)x;
-	const int y_int = (int) y;
+	const int x_int = (int)pos.x;
+	const int y_int = (int) pos.y;
 
 	gfx.PutPixel(14 + x_int, 0 + y_int, 138, 77, 0);
 	gfx.PutPixel(7 + x_int, 1 + y_int, 138, 77, 0);
@@ -283,16 +280,13 @@ void Poo::Draw(Graphics& gfx) const
 	gfx.PutPixel(6 + x_int, 23 + y_int, 51, 28, 0);
 }
 
-
-float Poo::GetX() const
+Vec2 Poo::GetPos() const
 {
-	return x;
+	return Vec2(pos.x, pos.y);
 }
 
-float Poo::GetY() const
-{
-	return y;
-}
+
+
 
 float Poo::GetWidth()
 {

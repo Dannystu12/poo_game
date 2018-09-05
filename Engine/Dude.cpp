@@ -3,21 +3,16 @@
 #include "Graphics.h"
 #include "Poo.h"
 
-Dude::Dude(float in_x, float in_y)
+Dude::Dude(const Vec2& pos_in)
 {
-	x = in_x;
-	y = in_y;
+	pos = pos_in;
 }
 
-float Dude::GetX() const
+Vec2 Dude::GetPos() const
 {
-	return x;
+	return Vec2(pos.x, pos.y);
 }
 
-float Dude::GetY() const
-{
-	return y;
-}
 
 float Dude::GetWidth()
 {
@@ -29,24 +24,16 @@ float Dude::GetHeight()
 	return height;
 }
 
-void Dude::Update(const Keyboard& kbd, float dt)
+void Dude::Update(const Mouse& mouse, float dt)
 {
-	if (kbd.KeyIsPressed(VK_RIGHT))
-	{
-		x += speed * dt;
-	}
-	else if (kbd.KeyIsPressed(VK_LEFT))
-	{
-		x -= speed * dt;
-	}
+	Vec2 vel(0.0f, 0.0f);
 
-	if (kbd.KeyIsPressed(VK_UP))
+	if (mouse.LeftIsPressed() )
 	{
-		y -= speed * dt;
-	}
-	else if (kbd.KeyIsPressed(VK_DOWN))
-	{
-		y += speed * dt;
+		const Vec2 center(pos.x + float(width)/2.0f, pos.y + float(height)/2.0f);
+		const Vec2 mousePos((float)mouse.GetPosX(), (float)mouse.GetPosY());
+		Vec2 delta = mousePos - center;
+		if(delta.GetLengthSq() > 2.0f) pos += delta.Normalize() * speed * dt;
 	}
 
 	ClampToScreen();
@@ -54,29 +41,29 @@ void Dude::Update(const Keyboard& kbd, float dt)
 
 void Dude::ClampToScreen()
 {
-	if (x < 0)
+	if (pos.x < 0)
 	{
-		x = 0;
+		pos.x = 0;
 	}
-	else if (x + width >= (float) Graphics::ScreenWidth)
+	else if (pos.x + width >= (float) Graphics::ScreenWidth)
 	{
-		x = float(Graphics::ScreenWidth - 1) - width;
+		pos.x = float(Graphics::ScreenWidth - 1) - width;
 	}
 
-	if (y < 0)
+	if (pos.y < 0)
 	{
-		y = 0;
+		pos.y = 0;
 	}
-	else if (y + height >= (float) Graphics::ScreenHeight)
+	else if (pos.y + height >= (float) Graphics::ScreenHeight)
 	{
-		y = float(Graphics::ScreenHeight - 1) - height;
+		pos.y = float(Graphics::ScreenHeight - 1) - height;
 	}
 }
 
 void Dude::Draw(Graphics& gfx) const
 {
-	const int x_int = (int) x;
-	const int y_int = (int)y;
+	const int x_int = (int) pos.x;
+	const int y_int = (int) pos.y;
 	gfx.PutPixel(7 + x_int, 0 + y_int, 0, 0, 0);
 	gfx.PutPixel(8 + x_int, 0 + y_int, 0, 0, 0);
 	gfx.PutPixel(9 + x_int, 0 + y_int, 0, 0, 0);
@@ -395,10 +382,10 @@ void Dude::Draw(Graphics& gfx) const
 	gfx.PutPixel(12 + x_int, 19 + y_int, 0, 0, 0);
 }
 
-bool Dude::IsColliding(float otherX, float otherY, float otherWidth, float otherHeight) const
+bool Dude::IsColliding(const Vec2& otherPos, float otherWidth, float otherHeight) const
 {
-	return x + width >= otherX &&
-		x <= otherX + otherWidth &&
-		y + height >= otherY &&
-		y <= otherY + otherHeight;
+	return pos.x + width >= otherPos.x &&
+		pos.x <= otherPos.x + otherWidth &&
+		pos.y + height >= otherPos.y &&
+		pos.y <= otherPos.y + otherHeight;
 }

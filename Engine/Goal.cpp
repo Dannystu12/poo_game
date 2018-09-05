@@ -31,7 +31,7 @@ void Goal::Draw(Graphics & gfx) const
 
 void Goal::Move(const Vec2& pos_in)
 {
-	pos += pos_in;
+	pos = pos_in;
 }
 
 

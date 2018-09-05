@@ -26,24 +26,26 @@ float Dude::GetHeight()
 
 void Dude::Update(const Keyboard& kbd, float dt)
 {
+	Vec2 vel(0.0f, 0.0f);
 	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		pos.x += speed * dt;
+		vel.x += 1.0f;
 	}
 	else if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		pos.x -= speed * dt;
+		vel.x -= 1.0f;
 	}
 
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		pos.y -= speed * dt;
+		vel.y -= 1.0f;
 	}
 	else if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		pos.y += speed * dt;
+		vel.y += 1.0f;
 	}
 
+	pos += vel.Normalize() * speed * dt;
 	ClampToScreen();
 }
 

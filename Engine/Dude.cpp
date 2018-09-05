@@ -33,7 +33,7 @@ void Dude::Update(const Mouse& mouse, float dt)
 		const Vec2 center(pos.x + float(width)/2.0f, pos.y + float(height)/2.0f);
 		const Vec2 mousePos((float)mouse.GetPosX(), (float)mouse.GetPosY());
 		Vec2 delta = mousePos - center;
-		pos += delta.Normalize() * speed * dt;
+		if(delta.GetLengthSq() > 2.0f) pos += delta.Normalize() * speed * dt;
 	}
 
 	ClampToScreen();

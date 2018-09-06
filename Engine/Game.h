@@ -29,6 +29,7 @@
 #include "Scoreboard.h"
 #include "FrameTimer.h"
 #include "Sound.h"
+#include "SoundEffect.h"
 #include <random>
 
 class Game
@@ -43,8 +44,6 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void DrawFace(int x, int y);
-	void DrawPoo(int x, int y);
 	void DrawGameOver(int x, int y);
 	void DrawTitleScreen(int x, int y);
 	/********************************/
@@ -65,6 +64,9 @@ private:
 	Poo poos[nPoo];
 	bool isStarted = false;
 	bool gameOver = false;
-	Sound coin;
+	SoundEffect pickup = SoundEffect({ L"Sounds\\coin.wav" });
+	Sound title = Sound(L"Sounds\\title.wav");
+	SoundEffect fart = SoundEffect(
+		{ L"Sounds\\fart1.wav",L"Sounds\\fart2.wav" });
 	/********************************/
 };

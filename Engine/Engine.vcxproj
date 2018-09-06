@@ -152,6 +152,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="XAudio\audiodefs.h" />
     <ClInclude Include="XAudio\comdecl.h" />

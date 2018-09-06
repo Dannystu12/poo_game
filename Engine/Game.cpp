@@ -39,6 +39,7 @@ Game::Game(MainWindow& wnd)
 	{
 		poos[i].Init(Vec2(xDist(rng), yDist(rng)), Vec2(vDist(rng), vDist(rng)));
 	}
+	title.Play();
 
 }
 
@@ -63,6 +64,7 @@ void Game::UpdateModel()
 			poo.Update(dude, dt);
 			if (dude.IsColliding(poo.GetPos(), poo.GetWidth(), poo.GetHeight()))
 			{
+				fart.Play(rng);
 				gameOver = true;
 				break;
 			}
@@ -70,6 +72,7 @@ void Game::UpdateModel()
 			{
 				scoreboard.Increment();
 				goal.Move(Vec2(xDist(rng), yDist(rng)));
+				pickup.Play(rng);
 			}
 		}
 	}

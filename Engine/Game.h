@@ -28,6 +28,7 @@
 #include "Goal.h"
 #include "Scoreboard.h"
 #include "FrameTimer.h"
+#include "Sound.h"
 #include <random>
 
 class Game
@@ -64,5 +65,6 @@ private:
 	Poo poos[nPoo];
 	bool isStarted = false;
 	bool gameOver = false;
+	Sound coin;
 	/********************************/
 };

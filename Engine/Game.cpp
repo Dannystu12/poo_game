@@ -32,7 +32,8 @@ Game::Game(MainWindow& wnd)
 	xDist(0, float(gfx.ScreenWidth - 1) - Poo::GetWidth()),
 	yDist(0, float(gfx.ScreenHeight - 1) - Poo::GetHeight()),
 	dude(Vec2(xDist(rng), yDist(rng))),
-	goal(Vec2(xDist(rng), yDist(rng)), Dude::GetWidth(), Dude::GetHeight())
+	goal(Vec2(xDist(rng), yDist(rng)), Dude::GetWidth(), Dude::GetHeight()),
+	coin(L"Sounds\\coin.wav")
 {
 	std::uniform_real_distribution<float> vDist(-1.5f * 60.0f, 1.5f * 60.0f);
 	for (int i = 0; i < nPoo; i++)
@@ -70,6 +71,7 @@ void Game::UpdateModel()
 			{
 				scoreboard.Increment();
 				goal.Move(Vec2(xDist(rng), yDist(rng)));
+				coin.Play();
 			}
 		}
 	}
